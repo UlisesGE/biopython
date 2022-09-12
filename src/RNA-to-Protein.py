@@ -2,7 +2,7 @@
        RNA-to-Protein
 
 VERSION
-        1.0
+        1.1
 
 AUTHOR
         Hector Ulises Gaspar <hectorgasp@gmail.com>
@@ -18,7 +18,7 @@ USAGE
 
 
 ARGUMENTS
-        - s --sequence
+        none
     
 SEE ALSO
         Ninguno
@@ -51,24 +51,32 @@ def DNA_test(seq):
     except ValueError:
         print(f"La secuencia no es valida, contiene caracteres no identificados")
     else:
-        return seq
+        seq = seq.replace("U", "T")
+        return(seq)
 
 '''
-def Translation(seq):
-    for i in range(0, len(seq), 3):
-        codon = seq[i:i+3]
+def Translation(dna, aminoacids):
+    for i in range(0, len(dna), 3):
+        codon = dna[i:i+3]
 
         if gencode[codon] == "_":
             break
         else:
             print(codon)
             aminoacids.append(gencode[codon])
+            return(aminoacids)
 '''
 
 aminoacids = []
 seq = input("Introduce tu secuencia de DNA o RNA: \n")
 seq = seq.upper()
-seq = seq.replace("U", "T")
+
+
+dna = DNA_test(seq)
+
+#peptide = "".join(Translation.aminoacids)
+
+#print("El peptido codificado por la secuencia es: " + peptide)
 
 for i in range(0, len(seq), 3):
     codon = seq[i:i+3]
@@ -76,7 +84,7 @@ for i in range(0, len(seq), 3):
     if gencode[codon] == "_":
         break
     else:
-        print(codon)
+        #print(codon)
         aminoacids.append(gencode[codon])
 
 peptide = "".join(aminoacids)
